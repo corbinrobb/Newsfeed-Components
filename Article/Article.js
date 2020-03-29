@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Random Article About Random Stuff!',
+    date: 'Feb 1st, 2020',
+    firstParagraph: `MaryLou wore the tiara with pride. There was something that made doing anything she didn't really want to do a bit easier when she wore it. She really didn't care what those staring through the window were thinking as she vacuumed her apartment.`,
+
+    secondParagraph: `His parents continued to question him. He didn't know what to say to them since they refused to believe the truth. He explained again and again, and they dismissed his explanation as a figment of his imagination. There was no way that grandpa, who had been dead for five years, could have told him where the treasure had been hidden. Of course, it didn't help that grandpa was roaring with laughter in the chair next to him as he tried to explain once again how he'd found it.`,
+
+    thirdParagraph: `There was a time when he would have embraced the change that was coming. In his youth, he sought adventure and the unknown, but that had been years ago. He wished he could go back and learn to find the excitement that came with change but it was useless. That curiosity had long left him to where he had come to loathe anything that put him out of his comfort zone.`
   }
 ];
 
@@ -112,3 +121,38 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(object) {
+  const div = document.createElement('div');
+  div.classList.add('article');
+  const h2 = document.createElement('h2');
+  h2.textContent = object.title;
+  const date = document.createElement('p');
+  date.classList.add('date');
+  date.textContent = object.date;
+  const p1 = document.createElement('p');
+  p1.textContent = object.firstParagraph;
+  const p2 = document.createElement('p');
+  p2.textContent = object.secondParagraph;
+  const p3 = document.createElement('p');
+  p3.textContent = object.thirdParagraph;
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.addEventListener('click', function() {
+    div.classList.toggle('article-open');
+  });
+  span.textContent = 'V';
+  div.appendChild(h2);
+  div.appendChild(date);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+  div.appendChild(span);
+  return div;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach(obj => {
+  articles.appendChild(createArticle(obj));
+});
