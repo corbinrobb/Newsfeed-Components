@@ -37,6 +37,7 @@ let menuItems = [
 function createMenu(arr) {
   const div = document.createElement('div');
   div.classList.add('menu');
+  div.dataset.isOpen = false;
 
   div.appendChild(arr.reduce((ul, liContent) => {
     const li = document.createElement('li');
@@ -45,10 +46,22 @@ function createMenu(arr) {
     return ul;
   }, document.createElement('ul')));
 
-  document.querySelector('.menu-button')
-      .addEventListener('click', function(e) {
-        div.classList.toggle('menu--open');
-      });
+  const menuButton = document.querySelector('.menu-button');
+  
+  menuButton.addEventListener('click', function(e) {
+    if(div.dataset.isOpen === 'false') {
+      gsap.to(div, { duration: 1, x: 350 });
+      div.dataset.isOpen = true;
+      e.stopPropagation();
+    } 
+  });
+
+  window.addEventListener('click', function(e) {
+    if (div.dataset.isOpen === 'true' && (e.target === div || !div.contains(e.target))) {
+      gsap.to(div, { duration: 2, x: -350 });
+      div.dataset.isOpen = false;
+    };
+  });
 
   return div;
 };

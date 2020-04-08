@@ -125,29 +125,52 @@ const data = [
 function createArticle(object) {
   const div = document.createElement('div');
   div.classList.add('article');
+
   const h2 = document.createElement('h2');
   h2.textContent = object.title;
+  div.appendChild(h2);
+
+  const close = document.createElement('button');
+  close.classList.add('close');
+  close.textContent = 'Close';
+  div.appendChild(close);
+
+  close.addEventListener('click', () => {
+    TweenLite.to(div, 0.75, { opacity: 0, display: 'none'})
+    
+  });
+
   const date = document.createElement('p');
   date.classList.add('date');
   date.textContent = object.date;
+  div.appendChild(date);
+
   const p1 = document.createElement('p');
   p1.textContent = object.firstParagraph;
+  div.appendChild(p1);
+
   const p2 = document.createElement('p');
   p2.textContent = object.secondParagraph;
+  div.appendChild(p2);
+
   const p3 = document.createElement('p');
   p3.textContent = object.thirdParagraph;
+  div.appendChild(p3);
+
   const span = document.createElement('span');
   span.classList.add('expandButton');
+  span.textContent = '\u25bc';
   span.addEventListener('click', function() {
-    div.classList.toggle('article-open');
+    if (span.textContent === '\u25bc') {
+      TweenLite.to(div, 1, { height: 'auto' });
+      span.textContent = '\u25b2';
+    } else {
+      TweenLite.to(div, 1.5, { height: '50px' });
+      span.textContent = '\u25bc';
+    }
   });
-  span.textContent = 'V';
-  div.appendChild(h2);
-  div.appendChild(date);
-  div.appendChild(p1);
-  div.appendChild(p2);
-  div.appendChild(p3);
   div.appendChild(span);
+  
   return div;
 }
 
