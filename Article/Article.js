@@ -155,7 +155,6 @@ function createArticle(object) {
 
   close.addEventListener('click', () => {
     TweenLite.to(div, 0.75, { opacity: 0, display: 'none'})
-    
   });
 
   const date = document.createElement('p');
@@ -177,14 +176,14 @@ function createArticle(object) {
 
   const span = document.createElement('span');
   span.classList.add('expandButton');
-  span.textContent = '\u25bc';
+  span.textContent = 'Click to Expand';
   span.addEventListener('click', function() {
-    if (span.textContent === '\u25bc') {
+    if (span.textContent === 'Click to Expand') {
       TweenLite.to(div, 1, { height: 'auto' });
-      span.textContent = '\u25b2';
+      span.textContent = 'Click to Close';
     } else {
       TweenLite.to(div, 1.5, { height: '50px' });
-      span.textContent = '\u25bc';
+      span.textContent = 'Click to Expand';
     }
   });
   div.appendChild(span);
@@ -197,3 +196,4 @@ const articles = document.querySelector('.articles');
 data.forEach(obj => {
   articles.appendChild(createArticle(obj));
 });
+

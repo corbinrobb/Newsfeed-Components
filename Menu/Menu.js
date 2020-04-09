@@ -50,7 +50,7 @@ function createMenu(arr) {
   
   menuButton.addEventListener('click', function(e) {
     if(div.dataset.isOpen === 'false') {
-      gsap.to(div, { duration: 1, x: 350 });
+      gsap.to(div, { duration: 1, x: 300 });
       div.dataset.isOpen = true;
       e.stopPropagation();
     } 
@@ -58,7 +58,7 @@ function createMenu(arr) {
 
   window.addEventListener('click', function(e) {
     if (div.dataset.isOpen === 'true' && (e.target === div || !div.contains(e.target))) {
-      gsap.to(div, { duration: 2, x: -350 });
+      gsap.to(div, { duration: 2, x: -300 });
       div.dataset.isOpen = false;
     };
   });
