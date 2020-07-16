@@ -85,6 +85,33 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Random Article About Random Stuff!',
+    date: 'Feb 1st, 2020',
+    firstParagraph: `MaryLou wore the tiara with pride. There was something that made doing anything she didn't really want to do a bit easier when she wore it. She really didn't care what those staring through the window were thinking as she vacuumed her apartment.`,
+
+    secondParagraph: `His parents continued to question him. He didn't know what to say to them since they refused to believe the truth. He explained again and again, and they dismissed his explanation as a figment of his imagination. There was no way that grandpa, who had been dead for five years, could have told him where the treasure had been hidden. Of course, it didn't help that grandpa was roaring with laughter in the chair next to him as he tried to explain once again how he'd found it.`,
+
+    thirdParagraph: `There was a time when he would have embraced the change that was coming. In his youth, he sought adventure and the unknown, but that had been years ago. He wished he could go back and learn to find the excitement that came with change but it was useless. That curiosity had long left him to where he had come to loathe anything that put him out of his comfort zone.`
+  },
+  {
+    title: 'Local Cheetah Just Wants to Run City Marathon',
+    date: 'March 3rd, 2020',
+    firstParagraph: `It's always good to bring a slower friend with you on a hike. If you happen to come across bears, the whole group doesn't have to worry. Only the slowest in the group do. That was the lesson they were about to learn that day.`,
+
+    secondParagraph: `It was a rat's nest. Not a literal one, but that is what her hair seemed to resemble every morning when she got up. It was going to take at least an hour to get it under control and she was sick and tired of it. She peered into the mirror and wondered if it was worth it. It wasn't. She opened the drawer and picked up the hair clippers.`,
+
+    thirdParagraph: `It was that terrifying feeling you have as you tightly hold the covers over you with the knowledge that there is something hiding under your bed. You want to look, but you don't at the same time. You're frozen with fear and unable to act. That's where she found herself and she didn't know what to do next`
+  },
+  {
+    title: 'Does Clicking On Articles On the Internet Give You SUPERPOWERS? Open To Find Out!',
+    date: 'March 3rd, 2020',
+    firstParagraph: `Cake or pie? I can tell a lot about you by which one you pick. It may seem silly, but cake people and pie people are really different. I know which one I hope you are, but that's not for me to decide. So, what is it? Cake or pie?`,
+
+    secondParagraph: `A long black shadow slid across the pavement near their feet and the five Venusians, very much startled, looked overhead. They were barely in time to see the huge gray form of the carnivore before it vanished behind a sign atop a nearby building which bore the mystifying information "Pepsi-Cola."`,
+
+    thirdParagraph: `I recollect that my first exploit in squirrel-shooting was in a grove of tall walnut-trees that shades one side of the valley. I had wandered into it at noontime, when all nature is peculiarly quiet, and was startled by the roar of my own gun, as it broke the Sabbath stillness around and was prolonged and reverberated by the angry echoes.`
   }
 ];
 
@@ -112,3 +139,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(object) {
+  const div = document.createElement('div');
+  div.classList.add('article');
+
+  const h2 = document.createElement('h2');
+  h2.textContent = object.title;
+  div.appendChild(h2);
+
+  const close = document.createElement('button');
+  close.classList.add('close');
+  close.textContent = 'Close';
+  div.appendChild(close);
+
+  close.addEventListener('click', () => {
+    TweenLite.to(div, 0.75, { opacity: 0, display: 'none'})
+  });
+
+  const date = document.createElement('p');
+  date.classList.add('date');
+  date.textContent = object.date;
+  div.appendChild(date);
+
+  const p1 = document.createElement('p');
+  p1.textContent = object.firstParagraph;
+  div.appendChild(p1);
+
+  const p2 = document.createElement('p');
+  p2.textContent = object.secondParagraph;
+  div.appendChild(p2);
+
+  const p3 = document.createElement('p');
+  p3.textContent = object.thirdParagraph;
+  div.appendChild(p3);
+
+  const span = document.createElement('span');
+  span.classList.add('expandButton');
+  span.textContent = 'Click to Expand';
+  span.addEventListener('click', function() {
+    if (span.textContent === 'Click to Expand') {
+      TweenLite.to(div, 1, { height: 'auto' });
+      span.textContent = 'Click to Close';
+    } else {
+      TweenLite.to(div, 1.5, { height: '50px' });
+      span.textContent = 'Click to Expand';
+    }
+  });
+  div.appendChild(span);
+  
+  return div;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach(obj => {
+  articles.appendChild(createArticle(obj));
+});
+
